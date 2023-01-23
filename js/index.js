@@ -1,5 +1,4 @@
 const searchForm = document.querySelector("#github-form")
-console.log(searchForm)
 searchForm.addEventListener("submit", getUser)
 
 function handleSubmit(e) {
@@ -21,15 +20,14 @@ function renderUser(user) {
     <img src="${user.avatar_url}/>
     <p>${user.html_url}</p>
     `
+    document.querySelector("#github-container").appendChild(card)
 }
 
-document.querySelector("#github-container").appendChild(card)
 
 const search = document.querySelector("#search")
 function getUser(e) {
     e.preventDefault()
-    console.log(search.value)
-    // fetch (`https://api.github.com/search/users?q=${search.value}`)
-    // .then(resp => resp.json())
-    // .then(user => renderUser(user))
+    fetch (`https://api.github.com/search/users?q=${search.value}`)
+    .then(resp => resp.json())
+    .then(user => renderUser(user))
 }
